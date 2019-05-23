@@ -55,7 +55,7 @@ class ClientFridge
         std::cout << "Fridge Client has started " <<std::endl;
         FindCallback f (std::bind(&ClientFridge::foundDevice, this, PH::_1));
         OCStackResult result = OCPlatform::findResource(
-                "", requestURI.str(), CT_DEFAULT, f);
+                "", requestURI.str(), CT_SCOPE_SITE, f);
 
         if(OC_STACK_OK != result)
         {

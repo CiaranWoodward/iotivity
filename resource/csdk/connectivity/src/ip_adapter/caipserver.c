@@ -1445,6 +1445,12 @@ static void sendMulticastData6(const u_arraylist_t *iflist,
             OIC_LOG_V(ERROR, TAG, "setsockopt6 failed: %s", CAIPS_GET_ERROR);
             return;
         }
+        int hoplim = 10;
+        if (setsockopt(fd, IPPROTO_IPV6, IPV6_MULTICAST_HOPS, &hoplim, sizeof (hoplim)))
+        {
+            OIC_LOG_V(ERROR, TAG, "setsockopt6 failed: %s", CAIPS_GET_ERROR);
+            return;
+        }
         sendData(fd, endpoint, data, datalen, "multicast", "ipv6");
     }
 }
